@@ -12,7 +12,11 @@ void bfs(Node<int>* root) {
     std::queue<Node<int>*> q;
     q.push(root);
     std::unordered_set<Node<int>*> visited{root};
+    // level to track how many layers we've gone through (i.e. sets of neighbours)
+    int level{};
     while (q.size() > 0) {
+      int s = q.size();
+      for (int i = 0; i < s; i++) {
         Node<int>* node = q.front();
         for (Node<int>* neighbor : get_neighbors(node)) {
             if (visited.count(neighbor)) {
@@ -22,6 +26,8 @@ void bfs(Node<int>* root) {
             visited.insert(neighbor);
         }
         q.pop();
+     }
+    level++;
     }
 }
 
